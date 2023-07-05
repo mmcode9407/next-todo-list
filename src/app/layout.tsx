@@ -1,4 +1,5 @@
 import Nav from '@/components/Nav';
+import TasksContextProvider from '@/context/TasksContext';
 import '@/styles/globals.css';
 import { Inter } from 'next/font/google';
 
@@ -19,7 +20,7 @@ export default function RootLayout({
 			<body className={`${inter.className} bg-gray-600`}>
 				<main>
 					<Nav />
-					{children}
+					<TasksContextProvider>{children}</TasksContextProvider>
 				</main>
 			</body>
 		</html>
