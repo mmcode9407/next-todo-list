@@ -29,7 +29,9 @@ const reducer = (state: Task[], action: ActionType) => {
 				isDone: !updatedState[id].isDone,
 			};
 			return updatedState;
-
+		case 'DELETE_TASK':
+			const newState = state.filter((item, index) => index !== action.id);
+			return newState;
 		default:
 			return state;
 	}

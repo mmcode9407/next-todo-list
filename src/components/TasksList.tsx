@@ -35,7 +35,11 @@ export default function TasksList() {
 								}`}>
 								{task.name}
 							</p>
-							<button className='w-[24px] h-[24px]shrink-0 text-3xl text-gray-300 hover:text-danger hover:bg-gray-400 transition-colors duration-300 rounded-lg'>
+							<button
+								className='w-[24px] h-[24px]shrink-0 text-3xl text-gray-300 hover:text-danger hover:bg-gray-400 transition-colors duration-300 rounded-lg'
+								onClick={() => {
+									dispatch({ type: 'DELETE_TASK', id: index });
+								}}>
 								&#10007;
 							</button>
 						</li>
