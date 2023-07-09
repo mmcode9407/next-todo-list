@@ -34,7 +34,6 @@ export default function TaskItem({ name, isDone, index }: Props) {
 					toggleTodo(index);
 				}}>
 				{isDone && <>&#10003;</>}
-				<input className='hidden' type='checkbox' />
 			</div>
 			<p
 				className={`text-gray-100 text-2xl ${
