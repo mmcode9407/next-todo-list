@@ -6,6 +6,7 @@ import { useState, useContext } from 'react';
 export default function Form() {
 	const [task, setTask] = useState<string>('');
 	const { dispatch } = useContext(TasksContext);
+	const [error, setError] = useState<string>('');
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = e.target;
@@ -16,8 +17,12 @@ export default function Form() {
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		dispatch({ type: 'ADD_TASK', payload: task });
-		setTask('');
+		if (task !== '') {
+			dispatch({ type: 'ADD_TASK', payload: task });
+			setTask('');
+		} else {
+			setError('Nie można dodać pustego zadania!');
+		}
 	};
 
 	return (
@@ -31,6 +36,7 @@ export default function Form() {
 						name='task'
 						value={task}
 						onChange={handleChange}
+						onFocus={() => setError('')}
 						placeholder='Add a new task'
 						className='grow p-6 rounded-xl bg-gray-500 text-gray-100 text-2xl placeholder:text-gray-300 border border-gray-700 outline-none focus-visible:border-purple-dark '
 					/>
@@ -44,6 +50,9 @@ export default function Form() {
 						/>
 					</button>
 				</form>
+				<div>
+					<p className='text-2xl text-danger text-center mt-8'>{error}</p>
+				</div>
 			</div>
 		</section>
 	);
