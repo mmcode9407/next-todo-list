@@ -10,7 +10,7 @@ interface Task {
 type ActionType = {
 	type: string;
 	payload?: string;
-	id: number;
+	id?: number;
 };
 
 const initialState: Task[] = [
@@ -21,14 +21,12 @@ const initialState: Task[] = [
 
 const reducer = (state: Task[], action: ActionType) => {
 	switch (action.type) {
+		case 'ADD_TASK':
+			return [...state, { name: action.payload, isDone: false }];
 		case 'TOGGLE_TODO':
-			const { id } = action;
-			const updatedState = [...state];
-			updatedState[id] = {
-				...updatedState[id],
-				isDone: !updatedState[id].isDone,
-			};
-			return updatedState;
+			return state.map((task, id) =>
+				id === action.id ? { ...task, isDone: !task.isDone } : task
+			);
 		case 'DELETE_TASK':
 			const newState = state.filter((item, index) => index !== action.id);
 			return newState;
@@ -47,6 +45,7 @@ export default function TasksContextProvider({
 }: {
 	children: React.ReactNode;
 }) {
+	// @ts-ignore
 	const [state, dispatch] = useReducer(reducer, initialState);
 
 	return (
