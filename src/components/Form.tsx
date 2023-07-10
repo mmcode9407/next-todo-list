@@ -1,12 +1,13 @@
 ﻿'use client';
 import { TasksContext } from '@/context/TasksContext';
 import Image from 'next/image';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 
 export default function Form() {
 	const [task, setTask] = useState<string>('');
 	const { dispatch } = useContext(TasksContext);
 	const [error, setError] = useState<string>('');
+	const [isAdded, setIsAdded] = useState<boolean>(false);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = e.target;
@@ -20,10 +21,17 @@ export default function Form() {
 		if (task !== '') {
 			dispatch({ type: 'ADD_TASK', payload: task });
 			setTask('');
+			setIsAdded(true);
 		} else {
 			setError('Nie można dodać pustego zadania!');
 		}
 	};
+
+	useEffect(() => {
+		setTimeout(() => {
+			setIsAdded(false);
+		}, 1500);
+	}, [isAdded]);
 
 	return (
 		<section>
@@ -52,6 +60,12 @@ export default function Form() {
 				</form>
 				<div>
 					<p className='text-2xl text-danger text-center mt-8'>{error}</p>
+				</div>
+				<div
+					className={` absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-8 ${
+						isAdded ? 'block' : 'hidden'
+					} text-2xl sm:text-4xl text-gray-100 bg-green-600 rounded-xl text-center`}>
+					<p>Your task has been added to the list </p>
 				</div>
 			</div>
 		</section>
