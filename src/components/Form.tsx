@@ -1,13 +1,16 @@
 ﻿'use client';
+
 import { TasksContext } from '@/context/TasksContext';
+import useStorage from '@/hooks/useStorage';
 import Image from 'next/image';
 import { useState, useContext, useEffect } from 'react';
 
 export default function Form() {
 	const [task, setTask] = useState<string>('');
-	const { dispatch } = useContext(TasksContext);
+	const { state: tasks, dispatch } = useContext(TasksContext);
 	const [error, setError] = useState<string>('');
 	const [isAdded, setIsAdded] = useState<boolean>(false);
+	const [saveToLS, getFromLS] = useStorage('tasks');
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = e.target;
@@ -32,6 +35,10 @@ export default function Form() {
 			setIsAdded(false);
 		}, 1500);
 	}, [isAdded]);
+
+	useEffect(() => {
+		saveToLS(tasks);
+	}, [tasks]);
 
 	return (
 		<section>

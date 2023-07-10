@@ -1,15 +1,31 @@
 ﻿'use client';
 
 import { TasksContext } from '@/context/TasksContext';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import TasksList from './TasksList';
+import useStorage from '@/hooks/useStorage';
 
 export default function Home() {
-	const { state: tasks } = useContext(TasksContext);
+	const { state: tasks, dispatch } = useContext(TasksContext);
+	const [saveToLS, getFromLS] = useStorage('tasks');
 
 	const isDoneNumber = Object.values(tasks).filter(
 		(item) => item.isDone === true
 	).length;
+
+	useEffect(() => {
+		const storageTasks = getFromLS();
+
+		if (!storageTasks || storageTasks.length === 0) {
+			return;
+		}
+
+		dispatch({ type: 'SET_TASKS', data: storageTasks });
+	}, []);
+
+	useEffect(() => {
+		saveToLS(tasks);
+	}, [tasks]);
 
 	return (
 		<section>

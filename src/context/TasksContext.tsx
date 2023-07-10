@@ -11,13 +11,10 @@ type ActionType = {
 	type: string;
 	payload?: string;
 	id?: number;
+	data?: Task[];
 };
 
-const initialState: Task[] = [
-	{ name: 'Wyrzucić śmieci', isDone: false },
-	{ name: 'Zrobić zakupy', isDone: true },
-	{ name: 'Wyjść z psem', isDone: false },
-];
+const initialState: Task[] = [];
 
 const reducer = (state: Task[], action: ActionType) => {
 	switch (action.type) {
@@ -30,6 +27,8 @@ const reducer = (state: Task[], action: ActionType) => {
 		case 'DELETE_TASK':
 			const newState = state.filter((item, index) => index !== action.id);
 			return newState;
+		case 'SET_TASKS':
+			return action.data;
 		default:
 			return state;
 	}
