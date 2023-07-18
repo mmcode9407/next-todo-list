@@ -26,7 +26,7 @@ export default function Form() {
 			setTask('');
 			setIsAdded(true);
 		} else {
-			setError('Nie można dodać pustego zadania!');
+			setError('You cannot add an empty task!');
 		}
 	};
 
