@@ -28,7 +28,7 @@ export default function Home() {
 	}, [tasks]);
 
 	return (
-		<section>
+		<section data-testid='home-component'>
 			<div className='wrapper flex flex-col gap-9'>
 				<div className='flex justify-between my-4'>
 					<p className='text-blue text-2xl font-bold'>

@@ -41,7 +41,7 @@ export default function Form() {
 	}, [tasks]);
 
 	return (
-		<section>
+		<section data-testid='form-component'>
 			<div className='wrapper'>
 				<form
 					className=' flex flex-wrap justify-center sm:flex-nowrap gap-3 '
