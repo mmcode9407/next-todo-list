@@ -55,7 +55,9 @@ export default function Form() {
 						placeholder='Add a new task'
 						className='grow p-6 rounded-xl bg-gray-500 text-gray-100 text-2xl placeholder:text-gray-300 border border-gray-700 outline-none focus-visible:border-purple-dark '
 					/>
-					<button className='flex items-center shrink gap-3 p-6 rounded-xl bg-blue-dark text-xl text-gray-100 uppercase hover:bg-blue cursor-pointer transition-colors duration-300'>
+					<button
+						className='flex items-center shrink gap-3 p-6 rounded-xl bg-blue-dark text-xl text-gray-100 uppercase hover:bg-blue cursor-pointer transition-colors duration-300'
+						aria-label='add task button'>
 						Add{' '}
 						<Image
 							src='/assets/images/plus.png'
