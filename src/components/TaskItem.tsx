@@ -22,7 +22,7 @@ export default function TaskItem({ name, isDone, index }: Props) {
 		<li
 			className='flex p-6 justify-between items-center gap-6 bg-gray-500 rounded-xl'
 			key={index}>
-			<div
+			<button
 				className={`w-8 h-8 rounded-full shrink-0 cursor-pointer transition-colors duration-300  
 						${
 							isDone
@@ -32,9 +32,10 @@ export default function TaskItem({ name, isDone, index }: Props) {
 						`}
 				onClick={() => {
 					toggleTodo(index);
-				}}>
+				}}
+				aria-label='check button'>
 				{isDone && <>&#10003;</>}
-			</div>
+			</button>
 			<p
 				className={`text-gray-100 text-2xl ${
 					isDone && 'line-through text-gray-300'
@@ -45,7 +46,8 @@ export default function TaskItem({ name, isDone, index }: Props) {
 				className='w-[24px] h-[24px]shrink-0 text-3xl text-gray-300 hover:text-danger hover:bg-gray-400 transition-colors duration-300 rounded-lg'
 				onClick={() => {
 					deleteTask(index);
-				}}>
+				}}
+				aria-label='delete button'>
 				&#10007;
 			</button>
 		</li>
